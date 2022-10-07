@@ -16,7 +16,7 @@ app.use(methodOverride('_method'));  // For PUT operation
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI = 'mongodb+srv://admin1:admin1@cluster0.y0mofav.mongodb.net/node-auth';
+const dbURI = '<mongoDB-URL>';
 mongoose.connect(dbURI)
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
