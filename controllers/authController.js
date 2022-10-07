@@ -32,6 +32,7 @@ const handleError = (err) => {
     return errors;
 }
 
+// JWT Token
 const maxAge= 3 * 24 * 60 * 60; // time in seconds
 const createToken = (id) => {
     return jwt.sign({ id }, 'blog project', {
@@ -48,6 +49,10 @@ module.exports.login_get = (req, res) => {
 }
 
 module.exports.signup_post = async (req, res) => {
+    // To get origin of the request
+    let origin = req.headers.origin;
+    console.log(`Origin: ${origin}`);
+
     const {email, password, name, location} = req.body;
 
     try{
@@ -63,6 +68,10 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
     const {email, password} = req.body;
+
+    let origin = req.headers.origin;
+    console.log(`Origin: ${origin}`);
+
     try{
         const user = await User.login(email, password);
         const token = createToken(user._id);
@@ -80,7 +89,6 @@ module.exports.logout_get = (req, res) => {
 }
 
 module.exports.userDetails_get = async (req, res) => {
-    console.log(res.locals.user);
     res.render('userDetails', {user: res.locals.user});
 }
 

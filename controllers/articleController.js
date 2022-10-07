@@ -33,10 +33,6 @@ module.exports.articelEdit_get = async (req, res) => {
     res.render('edit', { article: article });
 }
 
-module.exports.userDetails_get = (req, res) => {
-    console.log("=>", res.locals.user);
-}
-
 module.exports.articleUpdate_put = async (req, res) =>{
     req.article = await Article.findById(req.params.id);
     let article = req.article;
